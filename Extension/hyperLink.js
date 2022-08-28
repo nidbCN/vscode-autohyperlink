@@ -1,6 +1,6 @@
 const formatTable = {
     'markdown': '[{title}]({url})',
-    'html': '<a href="{url}>{title}</a>"',
+    'html': '<a href="{url}">{title}</a>',
     'latex': '\\href{{url}}{{title}}'
 }
 
