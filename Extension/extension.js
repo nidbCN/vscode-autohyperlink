@@ -26,10 +26,10 @@ function activate(context) {
 						vscode.window.showErrorMessage(msg);
 					} else {
 						const title = middleString(data, '<title>', '</title>').replace('\n', '');
-						vscode.window.showInformationMessage(title);
+
 						vscode.window.activeTextEditor.edit(builder => {
 							const position = vscode.window.activeTextEditor.selection.active;
-							const hyperlink = getHyperLinkByLanguage(languageId)
+							const hyperlink = getHyperLinkByLanguage(languageId, title, url);
 
 							builder.insert(position, hyperlink + '\n');
 						});
