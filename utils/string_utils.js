@@ -1,4 +1,4 @@
-export function middle_string(str, left, right) {
+exports.middle_string = function (str, left, right) {
     if (!str || !left || !right) {
         return "";
     }

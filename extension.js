@@ -27,7 +27,7 @@ function activate(context) {
 						vscode.window.showInformationMessage(title);
 						vscode.window.activeTextEditor.edit(builder => {
 							const position = vscode.window.activeTextEditor.selection.active;
-							builder.insert(position, `[${title}](${url})`);
+							builder.insert(position, `[${title}](${url})` + '\n');
 						});
 					}
 				})
