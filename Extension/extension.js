@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const request = require('request');
 const { middleString } = require('./utils/stringUtils');
+const { getHyperLinkByLanguage, getSupportedLangeage } = require('./hyperLink');
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -8,8 +9,12 @@ const { middleString } = require('./utils/stringUtils');
 function activate(context) {
 	let disposable = vscode.commands.registerCommand('autohyperlink.insert', function () {
 		// get current editor language
-		const langId = vscode.window.activeTextEditor.document.languageId;
-		console.log(langId);
+		const languageId = vscode.window.activeTextEditor.document.languageId;
+		if (getSupportedLangeage.indexOf(languageId) == -1) {
+			// unsupported
+			vscode.window.showErrorMessage(`Unsupported language: ${languageId}`);
+			return;
+		}
 
 		vscode.window.showInputBox({ title: 'url', value: 'https://' })
 			.then(url => {
@@ -24,7 +29,9 @@ function activate(context) {
 						vscode.window.showInformationMessage(title);
 						vscode.window.activeTextEditor.edit(builder => {
 							const position = vscode.window.activeTextEditor.selection.active;
-							builder.insert(position, `[${title}](${url})` + '\n');
+							const hyperlink = getHyperLinkByLanguage(languageId)
+
+							builder.insert(position, hyperlink + '\n');
 						});
 					}
 				})
