@@ -2,7 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 const request = require('request');
-const cheerio = require('cheerio');
+const { middle_string } = require('./utils/string_utils');
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -18,20 +18,21 @@ function activate(context) {
 		// The code you place here will be executed every time your command is executed
 
 		vscode.window.showInputBox({ title: 'url', value: 'https://' })
-			.then(value => {
-				request.get(value, (error, response, data) => {
+			.then(url => {
+				request.get(url, (error, response, data) => {
 					if (error) {
 						vscode.window.showErrorMessage(error);
 					} else {
-						const html = cheerio.load(data);
-						const title = html('title').html();
+						const title = middle_string(data, '<title>', '</title>');
 						vscode.window.showInformationMessage(title);
+						vscode.window.activeTextEditor.edit(builder => {
+							const position = vscode.window.activeTextEditor.selection.active;
+							builder.insert(position, `[${title}](${url})`);
+						});
 					}
 				})
-				vscode.window.showInformationMessage(value);
+				vscode.window.showInformationMessage(url);
 			});
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from AutoHyperlink!');
 	});
 
 	context.subscriptions.push(disposable);
