@@ -10,7 +10,7 @@ function activate(context) {
 	let disposable = vscode.commands.registerCommand('autohyperlink.insert', function () {
 		// get current editor language
 		const languageId = vscode.window.activeTextEditor.document.languageId;
-		if (getSupportedLangeage.indexOf(languageId) == -1) {
+		if (getSupportedLangeage().indexOf(languageId) == -1) {
 			// unsupported
 			vscode.window.showErrorMessage(`Unsupported language: ${languageId}`);
 			return;
