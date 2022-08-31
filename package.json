@@ -12,7 +12,7 @@
   "activationEvents": [
     "onCommand:autohyperlink.insert"
   ],
-  "main": "./extension.js",
+  "main": "./Extension/extension.js",
   "contributes": {
     "commands": [
       {
