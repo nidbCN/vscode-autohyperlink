@@ -31,7 +31,7 @@ function activate(context) {
 							const position = vscode.window.activeTextEditor.selection.active;
 							const hyperlink = getHyperLinkByLanguage(languageId, title, url);
 
-							builder.insert(position, hyperlink + '\n');
+							builder.insert(position, hyperlink);
 						});
 					}
 				})
