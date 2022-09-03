@@ -2,7 +2,7 @@
   "name": "autohyperlink",
   "displayName": "AutoHyperlink",
   "description": "Auto generate hyperlink and title",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.70.0"
   },
@@ -12,12 +12,12 @@
   "activationEvents": [
     "onCommand:autohyperlink.insert"
   ],
-  "main": "./Extension/extension.js",
+  "main": "./Extension/autohyperlink.js",
   "contributes": {
     "commands": [
       {
         "command": "autohyperlink.insert",
-        "title": "Insert a new hyperlink"
+        "title": "%autohyperlink.insert.title%"
       }
     ]
   },

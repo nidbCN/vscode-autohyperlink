@@ -7,12 +7,12 @@ const { getHyperLinkByLanguage, getSupportedLangeage } = require('./hyperLink');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-	let disposable = vscode.commands.registerCommand('autohyperlink.insert', function () {
+	let disposable = vscode.commands.registerCommand('autohyperlink.insert', () => {
 		// get current editor language
 		const languageId = vscode.window.activeTextEditor.document.languageId;
 		if (getSupportedLangeage().indexOf(languageId) == -1) {
 			// unsupported
-			vscode.window.showErrorMessage(`Unsupported language: ${languageId}`);
+			vscode.window.showErrorMessage('Unsupported language:' + languageId);
 			return;
 		}
 
